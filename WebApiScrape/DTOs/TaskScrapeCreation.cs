@@ -10,7 +10,7 @@ namespace WebApiScrape.DTOs
         public string Url { get; set; }
     }
 
-    public class TaskScrapeCreationResultDto
+    public class TaskScrapeResultDto
     {
         public string Url { get; set; }
         public Dictionary<string, string> Headers { get; set; }

@@ -3,11 +3,32 @@ using WebApiScrape.Interfaces;
 
 namespace WebApiScrape.Services
 {
-    public class ScrapeService : IScrapePage
+    public class ScrapeService : IScrapeService
     {
-        public Task<Dictionary<string, string>> GetHeadersAsync(TaskScrapeCreationRequestDto url)
+        public async Task<TaskScrapeResultDto> GetHeadersAsync(TaskScrapeCreationRequestDto request)
         {
-            throw new NotImplementedException();
+            var headers = new Dictionary<string, string>();
+
+            try
+            {
+                HttpClient client = new HttpClient();
+                HttpResponseMessage response = await client.GetAsync(request.Url);
+            
+                foreach(var header in response.Headers)
+                {
+                    headers.Add(header.Key, string.Join(",", header.Value));
+                }
+            }
+            catch (Exception ex)            {
+
+            }
+            var resultDto = new TaskScrapeResultDto
+            {
+                Url = request.Url,
+                Headers = headers
+            };
+
+            return resultDto;
         }
     }
 }
