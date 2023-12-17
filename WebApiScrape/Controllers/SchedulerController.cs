@@ -9,11 +9,11 @@ namespace WebApiScrape.Controllers
     public class SchedulerController : ControllerBase
     {
 
-        private readonly IScrapeService scrapeService;
+        private readonly ICronScheduler cronScheduler;
 
-        public SchedulerController(IScrapeService scrapeService)
+        public SchedulerController(ICronScheduler cronScheduler)
         {
-            this.scrapeService = scrapeService;
+            this.cronScheduler = cronScheduler;
         }
 
         [HttpPost("api/tasks/scrape")]
@@ -26,8 +26,8 @@ namespace WebApiScrape.Controllers
 
             try
             {
-                var result = await scrapeService.GetHeadersAsync(requestDto);
-                return Ok(result);
+                await cronScheduler.ScheduleJob(requestDto);
+                return Ok();
             }
             catch (Exception ex)
             {

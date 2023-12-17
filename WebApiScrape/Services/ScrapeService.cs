@@ -19,7 +19,7 @@ namespace WebApiScrape.Services
                     headers.Add(header.Key, string.Join(",", header.Value));
                 }
             }
-            catch (Exception ex)            {
+            catch (Exception ex)            { 
 
             }
             var resultDto = new TaskScrapeResultDto
