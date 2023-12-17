@@ -2,11 +2,17 @@
 
 namespace WebApiScrape.DTOs
 {
-    public class TaskCreation
+    public class TaskScrapeCreationRequestDto
     {
         [Required]
         public string CronExpression { get; set; }
         [Required]
         public string Url { get; set; }
+    }
+
+    public class TaskScrapeCreationResultDto
+    {
+        public string Url { get; set; }
+        public Dictionary<string, string> Headers { get; set; }
     }
 }
