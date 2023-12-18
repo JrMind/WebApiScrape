@@ -4,6 +4,6 @@ namespace WebApiScrape.Interfaces
 {
     public interface ICronScheduler
     {
-        Task ScheduleJob(TaskScrapeCreationRequestDto request);
+        Task<TaskCronScheduleResultDto> ScheduleJob(TaskScrapeCreationRequestDto request);
     }
 }

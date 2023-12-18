@@ -1,11 +1,26 @@
-﻿using WebApiScrape.DTOs;
+﻿using System.Text;
+using WebApiScrape.DTOs;
 using WebApiScrape.Interfaces;
 
 namespace WebApiScrape.Services
 {
     public class ScrapeService : IScrapeService
     {
-        public async Task<TaskScrapeResultDto> GetHeadersAsync(TaskScrapeCreationRequestDto request)
+        public async Task GetAndSaveCSVHeaders(TaskScrapeCreationRequestDto request)
+        {
+            var resultDto = await GetHeaders(request);
+
+            var csv = new StringBuilder();
+            foreach (var header in resultDto.Headers)
+            {
+                csv.AppendLine($"{header.Key},{header.Value}");
+            }
+
+            string filePath = "headers.csv"; 
+            File.WriteAllText(filePath, csv.ToString());
+        }
+
+        public async Task<TaskScrapeResultDto> GetHeaders(TaskScrapeCreationRequestDto request)
         {
             var headers = new Dictionary<string, string>();
 

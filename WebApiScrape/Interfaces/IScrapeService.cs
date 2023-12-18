@@ -4,6 +4,7 @@ namespace WebApiScrape.Interfaces
 {
     public interface IScrapeService
     {
-        Task<TaskScrapeResultDto> GetHeadersAsync(TaskScrapeCreationRequestDto request);
+        Task GetAndSaveCSVHeaders(TaskScrapeCreationRequestDto request);
+        Task<TaskScrapeResultDto> GetHeaders(TaskScrapeCreationRequestDto request);
     }
 }

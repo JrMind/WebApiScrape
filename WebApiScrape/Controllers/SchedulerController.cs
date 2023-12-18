@@ -17,7 +17,7 @@ namespace WebApiScrape.Controllers
         }
 
         [HttpPost("api/tasks/scrape")]
-        public async Task<ActionResult<TaskScrapeResultDto>> CreateTaskScrape([FromBody] TaskScrapeCreationRequestDto requestDto)
+        public async Task<ActionResult<TaskCronScheduleResultDto>> CreateTaskScrape([FromBody] TaskScrapeCreationRequestDto requestDto)
         {
             if (!ModelState.IsValid)
             {
@@ -26,8 +26,8 @@ namespace WebApiScrape.Controllers
 
             try
             {
-                await cronScheduler.ScheduleJob(requestDto);
-                return Ok();
+                var result = await cronScheduler.ScheduleJob(requestDto);
+                return Ok(new { cronTaskResult = result.CronTaskResult });
             }
             catch (Exception ex)
             {

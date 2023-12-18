@@ -17,13 +17,29 @@ namespace WebApiScrape.Services
 
         }
 
-        public async Task ScheduleJob(TaskScrapeCreationRequestDto request)
+        public async Task<TaskCronScheduleResultDto> ScheduleJob(TaskScrapeCreationRequestDto request)
         {
-            recurringJobManager.AddOrUpdate(
-             "ScrapeJob", 
-             () => scrapeService.GetHeadersAsync(request), 
-             request.CronExpression,
-             TimeZoneInfo.Local);
-        }
+            try
+            {
+                recurringJobManager.AddOrUpdate(
+                 "ScrapeJob",
+                 () => scrapeService.GetAndSaveCSVHeaders(request),
+                 request.CronExpression,
+                 TimeZoneInfo.Local);
+
+                return new TaskCronScheduleResultDto
+                {
+                    CronTaskResult = "Tarea agendada con éxito."
+                };
+            }
+        catch (Exception ex)
+        {
+                return new TaskCronScheduleResultDto
+                {
+                    CronTaskResult = $"Error al agendar la tarea: {ex.Message}"
+                };
+            }
+}
+        
     }
 }

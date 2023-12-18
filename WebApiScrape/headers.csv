@@ -1,0 +1,16 @@
+Connection,keep-alive
+Cache-Control,no-cache
+Content-Security-Policy-Report-Only,require-trusted-types-for 'script'; trusted-types angular angular#bundler angular#unsafe-bypass aio#analytics google#safe goog#html; report-uri https://csp.withgoogle.com/csp/angular.io
+ETag,"e6a989a4c334ba565d4fdfe486e82bc3ebf9a5173bc00610cb0460d1678e768a"
+Link,</generated/navigation.json>;rel=preload;as=fetch,</generated/docs/index.json>;rel=preload;as=fetch
+Strict-Transport-Security,max-age=31556926
+X-Frame-Options,DENY
+Accept-Ranges,bytes
+Date,Mon, 18 Dec 2023 09:03:33 GMT
+X-Served-By,cache-per12628-PER
+X-Cache,MISS
+X-Cache-Hits,0
+X-Timer,S1702890213.864615,VS0,VE213
+Vary,x-fh-requested-host,accept-encoding
+Alt-Svc,h3=":443",h3-29=":443",h3-27=":443"
+Transfer-Encoding,chunked
