@@ -29,11 +29,17 @@ builder.Services.AddHangfire(configuration => configuration
             UseRecommendedIsolationLevel = true,
             DisableGlobalLocks = true
         }));
+//cors -- validate correct configuration
+builder.Services.AddCors(options => options.AddPolicy("AllowWebapp",
+                            builder => builder.AllowAnyOrigin()
+                                              .AllowAnyHeader()
+                                              .AllowAnyMethod()));
 
 builder.Services.AddHangfireServer();
 builder.Services.AddScoped<CronSchedulerService>();
 var app = builder.Build();
 
+app.UseCors("AllowWebapp");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
